@@ -30,7 +30,7 @@ public class Item {
 	@Column(name = "PRICE")
 	private BigDecimal price;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "BILL", nullable = true)
 	private Bill bill;
 

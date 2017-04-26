@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "MINUSUSER")
@@ -15,18 +16,23 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "USERNAME")
+	@NotNull
+	@Column(name = "USERNAME", unique = true)
 	private String username;
 
+	@NotNull
 	@Column(name = "PASSWORD")
 	private String password;
 
-	@Column(name = "EMAIL")
+	@NotNull
+	@Column(name = "EMAIL", unique = true)
 	private String email;
 
+	@NotNull
 	@Column(name = "FIRSTNAME")
 	private String firstname;
 
+	@NotNull
 	@Column(name = "LASTNAME")
 	private String lastname;
 

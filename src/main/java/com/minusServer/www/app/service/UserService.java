@@ -1,5 +1,8 @@
 package com.minusServer.www.app.service;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+
 import com.minusServer.www.app.model.User;
 
 public interface UserService {
@@ -15,4 +18,12 @@ public interface UserService {
 	public void delete(User u);
 	
 	public void deleteAll();
+	
+	public byte[] generateSalt() throws NoSuchAlgorithmException;
+	
+	public byte[] hashPassword(String password, byte[] salt) throws NoSuchAlgorithmException, InvalidKeySpecException;
+	
+	public boolean autenticate(String loginPassword, byte[] databasePassword, byte[] salt) throws NoSuchAlgorithmException, InvalidKeySpecException;
+	
+	public User login(String username, String password) throws NoSuchAlgorithmException, InvalidKeySpecException;
 }

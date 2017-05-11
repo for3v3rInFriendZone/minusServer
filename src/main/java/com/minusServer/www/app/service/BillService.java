@@ -1,6 +1,9 @@
 package com.minusServer.www.app.service;
 
+import java.util.List;
+
 import com.minusServer.www.app.model.Bill;
+import com.minusServer.www.app.model.User;
 
 public interface BillService {
 
@@ -16,4 +19,5 @@ public interface BillService {
 
 	public void deleteAll();
 
+	public List<Bill> findUserBills(User user);
 }

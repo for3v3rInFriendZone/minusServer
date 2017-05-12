@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.minusServer.www.app.dto.ItemDto;
 import com.minusServer.www.app.model.Item;
 import com.minusServer.www.app.service.ItemService;
 
@@ -21,7 +22,7 @@ public class ItemController {
 	ItemService itemService;
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Item> save(@RequestBody Item item){
+	public ResponseEntity<Item> save(@RequestBody ItemDto item){
 		return new ResponseEntity<Item>(itemService.save(item), HttpStatus.CREATED);
 	}
 	

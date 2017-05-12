@@ -29,11 +29,7 @@ public class User implements Serializable{
 
 	@NotNull
 	@Column(name = "PASSWORD")
-	private byte[] password;
-	
-	@NotNull
-	@Column(name = "SALT")
-	private byte[] salt;
+	private String password;
 
 	@NotNull
 	@Column(name = "EMAIL", unique = true)
@@ -54,7 +50,7 @@ public class User implements Serializable{
 		super();
 	}
 
-	public User(String username, byte[] password, String email, String firstname, String lastname, String image) {
+	public User(String username, String password, String email, String firstname, String lastname, String image) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -76,20 +72,12 @@ public class User implements Serializable{
 		this.username = username;
 	}
 
-	public byte[] getPassword() {
+	public String getPassword() {
 		return password;
 	}
 
-	public void setPassword(byte[] password) {
+	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public byte[] getSalt() {
-		return salt;
-	}
-
-	public void setSalt(byte[] salt) {
-		this.salt = salt;
 	}
 
 	public String getEmail() {
@@ -133,7 +121,6 @@ public class User implements Serializable{
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((lastname == null) ? 0 : lastname.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		result = prime * result + ((salt == null) ? 0 : salt.hashCode());
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
@@ -172,11 +159,6 @@ public class User implements Serializable{
 				return false;
 		} else if (!password.equals(other.password))
 			return false;
-		if (salt == null) {
-			if (other.salt != null)
-				return false;
-		} else if (!salt.equals(other.salt))
-			return false;
 		if (username == null) {
 			if (other.username != null)
 				return false;
@@ -184,5 +166,4 @@ public class User implements Serializable{
 			return false;
 		return true;
 	}
-
 }

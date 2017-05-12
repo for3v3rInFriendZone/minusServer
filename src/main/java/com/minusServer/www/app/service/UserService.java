@@ -3,11 +3,12 @@ package com.minusServer.www.app.service;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 
+import com.minusServer.www.app.dto.UserDto;
 import com.minusServer.www.app.model.User;
 
 public interface UserService {
 
-	public User save(User user);
+	public User save(UserDto user);
 	
 	public Iterable<User> findAll();
 	
@@ -19,11 +20,9 @@ public interface UserService {
 	
 	public void deleteAll();
 	
-	public byte[] generateSalt() throws NoSuchAlgorithmException;
+	public String hashPassword(String password);
 	
-	public byte[] hashPassword(String password, byte[] salt) throws NoSuchAlgorithmException, InvalidKeySpecException;
-	
-	public boolean autenticate(String loginPassword, byte[] databasePassword, byte[] salt) throws NoSuchAlgorithmException, InvalidKeySpecException;
+	public boolean autenticate(String rawPassword, String databasePassword);
 	
 	public User login(String username, String password) throws NoSuchAlgorithmException, InvalidKeySpecException;
 }

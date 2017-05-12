@@ -35,9 +35,9 @@ public class Item implements Serializable{
 	@Column(name = "PRICE")
 	private BigDecimal price;
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	/*@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "BILL", nullable = true)
-	private Bill bill;
+	private Bill bill;*/
 
 	public Item() {
 		super();
@@ -78,12 +78,12 @@ public class Item implements Serializable{
 		this.price = price;
 	}
 
-	public Bill getBill() {
+	/*public Bill getBill() {
 		return bill;
 	}
 
 	public void setBill(Bill bill) {
 		this.bill = bill;
-	}
+	}*/
 
 }

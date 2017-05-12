@@ -44,7 +44,7 @@ public class Bill implements Serializable{
 	@Column(name = "PRICE")
 	private BigDecimal price;
 	
-	@OneToMany(fetch=FetchType.EAGER, mappedBy = "bill")
+	@OneToMany(fetch=FetchType.EAGER)
 	private List<Item> items = new ArrayList<Item>();
 	
 	@ManyToOne(fetch = FetchType.EAGER)

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.minusServer.www.app.dto.UserDto;
 import com.minusServer.www.app.model.User;
 import com.minusServer.www.app.service.UserService;
 
@@ -26,7 +27,7 @@ public class UserController {
 	UserService userService;
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<User> saveUser(@RequestBody User user) {
+	public ResponseEntity<User> saveUser(@RequestBody UserDto user) {
 
 		userService.save(user);
 		return new ResponseEntity<User>(HttpStatus.CREATED);

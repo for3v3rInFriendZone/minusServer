@@ -1,7 +1,7 @@
 package com.minusServer.www.app.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
-import java.math.BigInteger;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,7 +15,12 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "ITEM")
-public class Item {
+public class Item implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,9 +35,9 @@ public class Item {
 	@Column(name = "PRICE")
 	private BigDecimal price;
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	/*@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "BILL", nullable = true)
-	private Bill bill;
+	private Bill bill;*/
 
 	public Item() {
 		super();
@@ -73,12 +78,12 @@ public class Item {
 		this.price = price;
 	}
 
-	public Bill getBill() {
+	/*public Bill getBill() {
 		return bill;
 	}
 
 	public void setBill(Bill bill) {
 		this.bill = bill;
-	}
+	}*/
 
 }

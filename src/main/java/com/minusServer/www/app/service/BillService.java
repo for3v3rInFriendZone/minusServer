@@ -1,10 +1,14 @@
 package com.minusServer.www.app.service;
 
+import java.util.List;
+
+import com.minusServer.www.app.dto.BillDto;
 import com.minusServer.www.app.model.Bill;
+import com.minusServer.www.app.model.User;
 
 public interface BillService {
 
-	public Bill save(Bill bill);
+	public Bill save(BillDto bill);
 
 	public Bill findOne(Long id);
 
@@ -16,4 +20,5 @@ public interface BillService {
 
 	public void deleteAll();
 
+	public List<Bill> findUserBills(Long user);
 }

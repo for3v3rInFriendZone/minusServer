@@ -3,6 +3,7 @@ package com.minusServer.www.app.serviceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.minusServer.www.app.dto.ItemDto;
 import com.minusServer.www.app.model.Item;
 import com.minusServer.www.app.repository.ItemRepository;
 import com.minusServer.www.app.service.ItemService;
@@ -14,8 +15,11 @@ public class ItemServiceImpl implements ItemService{
 	ItemRepository itemRepo;
 
 	@Override
-	public Item save(Item item) {
-		// TODO Auto-generated method stub
+	public Item save(ItemDto itemDto) {
+		Item item = new Item();
+		item.setName(itemDto.getName());
+		item.setPrice(itemDto.getPrice());
+		item.setQuantity(itemDto.getQuantity());
 		return itemRepo.save(item);
 	}
 

@@ -1,10 +1,11 @@
 package com.minusServer.www.app.service;
 
+import com.minusServer.www.app.dto.ItemDto;
 import com.minusServer.www.app.model.Item;
 
 public interface ItemService {
 
-	public Item save(Item item);
+	public Item save(ItemDto item);
 
 	public Item findOne(Long id);
 

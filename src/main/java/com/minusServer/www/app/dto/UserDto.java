@@ -77,15 +77,12 @@ public class UserDto implements Serializable{
 		super();
 	}
 	
-	public UserDto(Long id, String username, String password, String firstname, String lastname, String email,
-			String image) {
+	public UserDto(String username, String password, String email, String firstname, String lastname) {
 		super();
-		this.id = id;
 		this.username = username;
 		this.password = password;
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.email = email;
-		this.image = image;
 	}
 }

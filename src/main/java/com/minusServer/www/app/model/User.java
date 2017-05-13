@@ -50,14 +50,13 @@ public class User implements Serializable{
 		super();
 	}
 
-	public User(String username, String password, String email, String firstname, String lastname, String image) {
+	public User(String username, String password, String email, String firstname, String lastname) {
 		super();
 		this.username = username;
 		this.password = password;
 		this.email = email;
 		this.firstname = firstname;
 		this.lastname = lastname;
-		this.image = image;
 	}
 
 	public Long getId() {

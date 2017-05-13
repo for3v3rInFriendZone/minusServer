@@ -13,26 +13,26 @@ import com.minusServer.www.app.repository.UserRepository;
 import com.minusServer.www.app.service.UserService;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
 	@Autowired
 	UserRepository userRepository;
-	
+
 	@Autowired
 	AppConfig encoder;
-	
+
 	@Override
 	public User save(UserDto userDto) {
-		
+
 		User user = new User();
-		
+
 		user.setEmail(userDto.getEmail());
 		user.setFirstname(userDto.getFirstname());
 		user.setLastname(userDto.getLastname());
 		user.setUsername(userDto.getUsername());
 		user.setPassword(hashPassword(userDto.getPassword()));
 		user.setImage(userDto.getImage());
-		
+
 		return userRepository.save(user);
 	}
 
@@ -61,15 +61,13 @@ public class UserServiceImpl implements UserService{
 		userRepository.deleteAll();
 	}
 
-	
-
 	@Override
 	public User login(String username, String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
-		
+
 		User user = userRepository.findByUsername(username);
-		
-		if(user != null){
-			if(autenticate(password, user.getPassword())){
+
+		if (user != null) {
+			if (autenticate(password, user.getPassword())) {
 				return user;
 			} else {
 				return null;
@@ -81,7 +79,7 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public String hashPassword(String password) {
-		//BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		// BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		return encoder.passwordEncoder().encode(password);
 	}
 
@@ -89,7 +87,5 @@ public class UserServiceImpl implements UserService{
 	public boolean autenticate(String rawPassword, String databasePassword) {
 		return encoder.passwordEncoder().matches(rawPassword, databasePassword);
 	}
-
-
 
 }

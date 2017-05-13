@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.minusServer.www.app.dto.LoginData;
 import com.minusServer.www.app.dto.UserDto;
 import com.minusServer.www.app.model.User;
 import com.minusServer.www.app.service.UserService;
@@ -42,22 +43,21 @@ public class UserController {
 		return new ResponseEntity<List<User>>(users, HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/login", method = RequestMethod.POST, consumes = "application/json")
-	public ResponseEntity<User> login(@RequestBody String payload){
-		
-		JSONObject json = new JSONObject(payload);
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public ResponseEntity<User> login(@RequestBody LoginData loginData){
 		
 		User user = null;
 		
 		try {
-			user = userService.login(json.getString("username"), json.getString("password"));
+			user = userService.login(loginData.getUsername(), loginData.getPassword());
 		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (InvalidKeySpecException e) {
-			e.printStackTrace();
-		} catch (JSONException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		
 		if(user == null){
 			return new ResponseEntity<User>(HttpStatus.NOT_FOUND);

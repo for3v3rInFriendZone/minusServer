@@ -33,7 +33,7 @@ public class BillServiceImpl implements BillService{
 		bill.setIssuer(billDto.getIssuer());
 		bill.setLocation(billDto.getLocation());
 		bill.setPrice(billDto.getPrice());
-		bill.setUser(userService.findOne(billDto.getUser()));
+		bill.setUser(userService.findOne(billDto.getUser().getId()));
 		
 		for(int i = 0; i < billDto.getItems().size(); i++){
 			bill.getItems().add(itemService.save(billDto.getItems().get(i)));

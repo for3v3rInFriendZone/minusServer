@@ -19,7 +19,7 @@ public class BillDto implements Serializable{
 	private String date;
 	private BigDecimal price;
 	private List<ItemDto> items = new ArrayList<ItemDto>();
-	private Long user;
+	private UserDto user;
 	
 	public Long getId() {
 		return id;
@@ -77,11 +77,11 @@ public class BillDto implements Serializable{
 		this.items = items;
 	}
 	
-	public Long getUser() {
+	public UserDto getUser() {
 		return user;
 	}
 	
-	public void setUser(Long user) {
+	public void setUser(UserDto user) {
 		this.user = user;
 	}
 
@@ -89,10 +89,9 @@ public class BillDto implements Serializable{
 		super();
 	}
 
-	public BillDto(Long id, String name, String location, String issuer, String date, BigDecimal price,
-			List<ItemDto> items, Long user) {
+	public BillDto(String name, String location, String issuer, String date, BigDecimal price,
+			List<ItemDto> items, UserDto user) {
 		super();
-		this.id = id;
 		this.name = name;
 		this.location = location;
 		this.issuer = issuer;

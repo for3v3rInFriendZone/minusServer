@@ -24,6 +24,7 @@ public class BillController {
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Bill> saveBill(@RequestBody BillDto bill){
+		
 		return new ResponseEntity<Bill>(billService.save(bill), HttpStatus.CREATED);
 	}
 	

@@ -70,6 +70,8 @@ public class UserController {
 	@RequestMapping(value = "/userBills/{userId}", method = RequestMethod.GET)
 	public ResponseEntity<List<Bill>> getUserBills(@PathVariable Long userId){
 		
+		List<Bill> bills = new ArrayList<Bill>();
+		bills = billService.findUserBills(userId);
 		return new ResponseEntity<List<Bill>>(billService.findUserBills(userId), HttpStatus.OK);
 		
 	}

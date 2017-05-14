@@ -3,6 +3,7 @@ package com.minusServer.www.app.dto;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class BillDto implements Serializable{
@@ -16,7 +17,7 @@ public class BillDto implements Serializable{
 	private String name;
 	private String location;
 	private String issuer;
-	private String date;
+	private Date date;
 	private BigDecimal price;
 	private List<ItemDto> items = new ArrayList<ItemDto>();
 	private Long user;
@@ -53,11 +54,11 @@ public class BillDto implements Serializable{
 		this.issuer = issuer;
 	}
 	
-	public String getDate() {
+	public Date getDate() {
 		return date;
 	}
 	
-	public void setDate(String date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 	
@@ -89,7 +90,7 @@ public class BillDto implements Serializable{
 		super();
 	}
 
-	public BillDto(Long id, String name, String location, String issuer, String date, BigDecimal price,
+	public BillDto(Long id, String name, String location, String issuer, Date date, BigDecimal price,
 			List<ItemDto> items, Long user) {
 		super();
 		this.id = id;

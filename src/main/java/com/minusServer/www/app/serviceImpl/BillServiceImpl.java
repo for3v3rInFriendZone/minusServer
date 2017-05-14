@@ -30,6 +30,7 @@ public class BillServiceImpl implements BillService{
 		
 		Bill bill = new Bill();
 		bill.setName(billDto.getName());
+		bill.setDate(billDto.getDate());
 		bill.setIssuer(billDto.getIssuer());
 		bill.setLocation(billDto.getLocation());
 		bill.setPrice(billDto.getPrice());

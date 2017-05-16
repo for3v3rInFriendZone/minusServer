@@ -3,22 +3,19 @@ package com.minusServer.www.app.service;
 import java.util.List;
 
 import com.minusServer.www.app.dto.BillDto;
-import com.minusServer.www.app.model.Bill;
-import com.minusServer.www.app.model.User;
+
 
 public interface BillService {
 
-	public Bill save(BillDto bill);
+	public BillDto save(BillDto billDTO);
 
-	public Bill findOne(Long id);
+	public BillDto findOne(Integer id);
 
-	public Iterable<Bill> findAll();
+	public List<BillDto> findAll();
 
-	public void delete(Long id);
-
-	public void delete(Bill bill);
+	public void delete(Integer id);
 
 	public void deleteAll();
 
-	public List<Bill> findUserBills(Long user);
+	public List<BillDto> findUserBills(Integer userId);
 }

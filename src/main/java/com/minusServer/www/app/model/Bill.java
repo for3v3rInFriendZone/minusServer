@@ -1,6 +1,5 @@
 package com.minusServer.www.app.model;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,9 +7,6 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -18,16 +14,12 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "BILL")
-public class Bill implements Serializable{
+public class Bill extends AbstractBaseEntity{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
 
 	@Column(name = "NAME")
 	private String name;
@@ -51,7 +43,7 @@ public class Bill implements Serializable{
 	@JoinColumn(name = "MINUSUSER", nullable = true)
 	private User user;
 
-	public Bill() {
+	/*public Bill() {
 		super();
 	}
 
@@ -63,11 +55,7 @@ public class Bill implements Serializable{
 		this.date = date;
 		this.price = price;
 		this.items = items;
-	}
-
-	public Long getId() {
-		return id;
-	}
+	}*/
 
 	public String getName() {
 		return name;
@@ -125,7 +113,7 @@ public class Bill implements Serializable{
 		this.user = user;
 	}
 
-	@Override
+/*	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -178,5 +166,5 @@ public class Bill implements Serializable{
 		} else if (!price.equals(other.price))
 			return false;
 		return true;
-	}	
+	}	*/
 }

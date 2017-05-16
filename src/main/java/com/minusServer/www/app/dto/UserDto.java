@@ -1,15 +1,13 @@
 package com.minusServer.www.app.dto;
 
-import java.io.Serializable;
-
-public class UserDto implements Serializable{
+public class UserDto extends AbstractDTO{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private Long id;
+	private Integer id;
 	private String username;
 	private String password;
 	private String firstname;
@@ -17,14 +15,14 @@ public class UserDto implements Serializable{
 	private String email;
 	private String image;
 	
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
-	
-	public void setId(Long id) {
+
+	public void setId(Integer id) {
 		this.id = id;
 	}
-	
+
 	public String getUsername() {
 		return username;
 	}
@@ -73,7 +71,7 @@ public class UserDto implements Serializable{
 		this.image = image;
 	}
 	
-	public UserDto() {
+	/*public UserDto() {
 		super();
 	}
 	
@@ -87,5 +85,5 @@ public class UserDto implements Serializable{
 		this.lastname = lastname;
 		this.email = email;
 		this.image = image;
-	}
+	}*/
 }

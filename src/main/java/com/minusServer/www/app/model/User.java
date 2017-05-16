@@ -1,27 +1,18 @@
 package com.minusServer.www.app.model;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "MINUSUSER")
-public class User implements Serializable{
+public class User extends AbstractBaseEntity{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
 
 	@NotNull
 	@Column(name = "USERNAME", unique = true)
@@ -46,7 +37,7 @@ public class User implements Serializable{
 	@Column(name = "IMAGE")
 	private String image;
 
-	public User() {
+	/*public User() {
 		super();
 	}
 
@@ -58,12 +49,8 @@ public class User implements Serializable{
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.image = image;
-	}
+	}*/
 
-	public Long getId() {
-		return id;
-	}
-	
 	public String getUsername() {
 		return username;
 	}
@@ -112,7 +99,7 @@ public class User implements Serializable{
 		this.image = image;
 	}
 
-	@Override
+	/*@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -165,5 +152,5 @@ public class User implements Serializable{
 		} else if (!username.equals(other.username))
 			return false;
 		return true;
-	}
+	}*/
 }

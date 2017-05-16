@@ -1,30 +1,19 @@
 package com.minusServer.www.app.model;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "ITEM")
-public class Item implements Serializable{
+public class Item extends AbstractBaseEntity {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
 
 	@Column(name = "NAME")
 	private String name;
@@ -39,7 +28,7 @@ public class Item implements Serializable{
 	@JoinColumn(name = "BILL", nullable = true)
 	private Bill bill;*/
 
-	public Item() {
+	/*public Item() {
 		super();
 	}
 
@@ -48,11 +37,8 @@ public class Item implements Serializable{
 		this.name = name;
 		this.quantity = quantity;
 		this.price = price;
-	}
+	}*/
 
-	public Long getId() {
-		return id;
-	}
 
 	public String getName() {
 		return name;

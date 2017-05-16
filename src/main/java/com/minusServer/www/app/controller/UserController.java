@@ -2,7 +2,6 @@ package com.minusServer.www.app.controller;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONException;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.minusServer.www.app.dto.UserDto;
-import com.minusServer.www.app.model.User;
 import com.minusServer.www.app.service.UserService;
 
 @RestController
@@ -27,30 +25,29 @@ public class UserController {
 	UserService userService;
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<User> saveUser(@RequestBody UserDto user) {
+	public ResponseEntity<UserDto> saveUser(@RequestBody UserDto userDto) {
 
-		userService.save(user);
-		return new ResponseEntity<User>(HttpStatus.CREATED);
+		userService.save(userDto);
+		return new ResponseEntity<UserDto>(HttpStatus.CREATED);
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<User>> getAll() {
+	public ResponseEntity<List<UserDto>> getAll() {
 
-		List<User> users = new ArrayList<User>();
-		users = (List<User>) userService.findAll();
+		List<UserDto> users =  (List<UserDto>) userService.findAll();
 
-		return new ResponseEntity<List<User>>(users, HttpStatus.OK);
+		return new ResponseEntity<List<UserDto>>(users, HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST, consumes = "application/json")
-	public ResponseEntity<User> login(@RequestBody String payload){
+	public ResponseEntity<UserDto> login(@RequestBody String payload){
 		
 		JSONObject json = new JSONObject(payload);
 		
-		User user = null;
+		UserDto userDto = null;
 		
 		try {
-			user = userService.login(json.getString("username"), json.getString("password"));
+			userDto = userService.login(json.getString("username"), json.getString("password"));
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		} catch (InvalidKeySpecException e) {
@@ -59,10 +56,10 @@ public class UserController {
 			e.printStackTrace();
 		}
 		
-		if(user == null){
-			return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+		if(userDto == null){
+			return new ResponseEntity<UserDto>(HttpStatus.NOT_FOUND);
 		} else {
-			return new ResponseEntity<User>(user, HttpStatus.OK);
+			return new ResponseEntity<UserDto>(userDto, HttpStatus.OK);
 		}		
 	}
 

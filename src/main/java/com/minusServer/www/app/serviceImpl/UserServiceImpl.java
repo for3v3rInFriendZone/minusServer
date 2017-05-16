@@ -2,17 +2,21 @@ package com.minusServer.www.app.serviceImpl;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.minusServer.www.app.conf.AppConfig;
 import com.minusServer.www.app.dto.UserDto;
+import com.minusServer.www.app.mapper.UserMapper;
 import com.minusServer.www.app.model.User;
 import com.minusServer.www.app.repository.UserRepository;
 import com.minusServer.www.app.service.UserService;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService{
 
 	@Autowired
@@ -21,39 +25,30 @@ public class UserServiceImpl implements UserService{
 	@Autowired
 	AppConfig encoder;
 	
+	@Autowired
+	UserMapper userMapper;
+	
 	@Override
-	public User save(UserDto userDto) {
+	public UserDto save(UserDto userDto) {
 		
-		User user = new User();
-		
-		user.setEmail(userDto.getEmail());
-		user.setFirstname(userDto.getFirstname());
-		user.setLastname(userDto.getLastname());
-		user.setUsername(userDto.getUsername());
-		user.setPassword(hashPassword(userDto.getPassword()));
-		user.setImage(userDto.getImage());
-		
-		return userRepository.save(user);
+		User user = userMapper.userDTOToUser(userDto);
+		user = userRepository.save(user);
+		return userMapper.userToUserDTO(user);
 	}
 
 	@Override
-	public Iterable<User> findAll() {
-		return userRepository.findAll();
+	public List<UserDto> findAll() {
+		return userMapper.usersToUserDTOs((List<User>) userRepository.findAll());
 	}
 
 	@Override
-	public User findOne(Long id) {
-		return userRepository.findOne(id);
+	public UserDto findOne(Integer id) {
+		return userMapper.userToUserDTO(userRepository.findOne(id));
 	}
 
 	@Override
-	public void delete(Long id) {
+	public void delete(Integer id) {
 		userRepository.delete(id);
-	}
-
-	@Override
-	public void delete(User u) {
-		userRepository.delete(u);
 	}
 
 	@Override
@@ -64,13 +59,14 @@ public class UserServiceImpl implements UserService{
 	
 
 	@Override
-	public User login(String username, String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
+	public UserDto login(String username, String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
 		
 		User user = userRepository.findByUsername(username);
+		UserDto userDto = userMapper.userToUserDTO(user);
 		
 		if(user != null){
 			if(autenticate(password, user.getPassword())){
-				return user;
+				return userDto;
 			} else {
 				return null;
 			}

@@ -30,6 +30,7 @@ public class BillController {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<Bill>> getAll(){
+		
 		return new ResponseEntity<List<Bill>>((List<Bill>)billService.findAll(), HttpStatus.OK);
 	}
 	

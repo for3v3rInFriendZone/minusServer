@@ -3,6 +3,7 @@ package com.minusServer.www.app.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -39,7 +40,7 @@ public class Bill implements Serializable{
 	private String issuer;
 
 	@Column(name = "DATE")
-	private String date;
+	private Date date;
 
 	@Column(name = "PRICE")
 	private BigDecimal price;
@@ -55,7 +56,7 @@ public class Bill implements Serializable{
 		super();
 	}
 
-	public Bill(String name, String location, String issuer, String date, BigDecimal price, ArrayList<Item> items) {
+	public Bill(String name, String location, String issuer, Date date, BigDecimal price, ArrayList<Item> items) {
 		super();
 		this.name = name;
 		this.location = location;
@@ -93,11 +94,11 @@ public class Bill implements Serializable{
 		this.issuer = issuer;
 	}
 
-	public String getDate() {
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(String date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 

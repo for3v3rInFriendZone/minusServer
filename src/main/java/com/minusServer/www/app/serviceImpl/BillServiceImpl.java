@@ -1,5 +1,6 @@
 package com.minusServer.www.app.serviceImpl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,7 @@ public class BillServiceImpl implements BillService{
 		bill.setLocation(billDto.getLocation());
 		bill.setPrice(billDto.getPrice());
 		bill.setUser(userService.findOne(billDto.getUser().getId()));
+		bill.setDate(new Date(billDto.getDate()));
 		
 		for(int i = 0; i < billDto.getItems().size(); i++){
 			bill.getItems().add(itemService.save(billDto.getItems().get(i)));

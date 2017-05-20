@@ -84,20 +84,4 @@ public class BillDto extends AbstractDTO{
 		this.userId = userId;
 	}
 	
-	/*public BillDto() {
-		super();
-	}
-
-	public BillDto(Long id, String name, String location, String issuer, String date, BigDecimal price,
-			List<ItemDto> items, Long user) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.location = location;
-		this.issuer = issuer;
-		this.date = date;
-		this.price = price;
-		this.items = items;
-		this.user = user;
-	}*/
 }

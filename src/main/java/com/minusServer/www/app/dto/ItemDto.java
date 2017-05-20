@@ -46,15 +46,4 @@ public class ItemDto extends AbstractDTO{
 		this.price = price;
 	}
 
-	/*public ItemDto() {
-		super();
-	}
-
-	public ItemDto(Long id, String name, Integer quantity, BigDecimal price) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.quantity = quantity;
-		this.price = price;
-	}*/
 }

@@ -43,20 +43,6 @@ public class Bill extends AbstractBaseEntity{
 	@JoinColumn(name = "MINUSUSER", nullable = true)
 	private User user;
 
-	/*public Bill() {
-		super();
-	}
-
-	public Bill(String name, String location, String issuer, String date, BigDecimal price, ArrayList<Item> items) {
-		super();
-		this.name = name;
-		this.location = location;
-		this.issuer = issuer;
-		this.date = date;
-		this.price = price;
-		this.items = items;
-	}*/
-
 	public String getName() {
 		return name;
 	}

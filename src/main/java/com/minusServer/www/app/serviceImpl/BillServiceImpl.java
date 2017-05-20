@@ -8,8 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.minusServer.www.app.dto.BillDto;
 import com.minusServer.www.app.dto.UserDto;
-import com.minusServer.www.app.mapper.BillMapper;
-import com.minusServer.www.app.mapper.UserMapper;
+import com.minusServer.www.app.mapper.service.BillMapperService;
+import com.minusServer.www.app.mapper.service.UserMapperService;
 import com.minusServer.www.app.model.Bill;
 import com.minusServer.www.app.model.User;
 import com.minusServer.www.app.repository.BillRepository;
@@ -31,10 +31,10 @@ public class BillServiceImpl implements BillService{
 	UserService userService;
 	
 	@Autowired
-	BillMapper billMapper;
+	BillMapperService billMapper;
 	
 	@Autowired
-	UserMapper userMapper;
+	UserMapperService userMapper;
 	
 	@Override
 	public BillDto save(BillDto billDto) {

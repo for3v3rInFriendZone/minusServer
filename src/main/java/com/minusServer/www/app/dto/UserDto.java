@@ -71,19 +71,4 @@ public class UserDto extends AbstractDTO{
 		this.image = image;
 	}
 	
-	/*public UserDto() {
-		super();
-	}
-	
-	public UserDto(Long id, String username, String password, String firstname, String lastname, String email,
-			String image) {
-		super();
-		this.id = id;
-		this.username = username;
-		this.password = password;
-		this.firstname = firstname;
-		this.lastname = lastname;
-		this.email = email;
-		this.image = image;
-	}*/
 }

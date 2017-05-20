@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.minusServer.www.app.dto.ItemDto;
-import com.minusServer.www.app.mapper.ItemMapper;
+import com.minusServer.www.app.mapper.service.ItemMapperService;
 import com.minusServer.www.app.model.Item;
 import com.minusServer.www.app.repository.ItemRepository;
 import com.minusServer.www.app.service.ItemService;
@@ -20,7 +20,7 @@ public class ItemServiceImpl implements ItemService{
 	ItemRepository itemRepository;
 	
 	@Autowired
-	ItemMapper itemMapper;
+	ItemMapperService itemMapper;
 
 	@Override
 	public ItemDto save(ItemDto itemDto) {

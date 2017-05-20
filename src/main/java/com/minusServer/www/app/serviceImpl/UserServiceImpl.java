@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.minusServer.www.app.conf.AppConfig;
 import com.minusServer.www.app.dto.UserDto;
-import com.minusServer.www.app.mapper.UserMapper;
+import com.minusServer.www.app.mapper.service.UserMapperService;
 import com.minusServer.www.app.model.User;
 import com.minusServer.www.app.repository.UserRepository;
 import com.minusServer.www.app.service.UserService;
@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService{
 	AppConfig encoder;
 	
 	@Autowired
-	UserMapper userMapper;
+	UserMapperService userMapper;
 	
 	@Override
 	public UserDto save(UserDto userDto) {

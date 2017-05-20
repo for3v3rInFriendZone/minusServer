@@ -24,22 +24,6 @@ public class Item extends AbstractBaseEntity {
 	@Column(name = "PRICE")
 	private BigDecimal price;
 
-	/*@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "BILL", nullable = true)
-	private Bill bill;*/
-
-	/*public Item() {
-		super();
-	}
-
-	public Item(String name, Integer quantity, BigDecimal price) {
-		super();
-		this.name = name;
-		this.quantity = quantity;
-		this.price = price;
-	}*/
-
-
 	public String getName() {
 		return name;
 	}

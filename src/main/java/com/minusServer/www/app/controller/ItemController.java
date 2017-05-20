@@ -19,14 +19,14 @@ public class ItemController {
 
 	@Autowired
 	ItemService itemService;
-	
+
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<ItemDto> save(@RequestBody ItemDto itemDto){
+	public ResponseEntity<ItemDto> save(@RequestBody ItemDto itemDto) {
 		return new ResponseEntity<ItemDto>(itemService.save(itemDto), HttpStatus.CREATED);
 	}
-	
+
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<ItemDto>> getAll(){
+	public ResponseEntity<List<ItemDto>> getAll() {
 		return new ResponseEntity<List<ItemDto>>((List<ItemDto>) itemService.findAll(), HttpStatus.OK);
 	}
 }

@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "MINUSUSER")
-public class User extends AbstractBaseEntity{
+public class User extends AbstractBaseEntity {
 
 	/**
 	 * 
@@ -33,10 +33,9 @@ public class User extends AbstractBaseEntity{
 	@NotNull
 	@Column(name = "LASTNAME")
 	private String lastname;
-	
+
 	@Column(name = "IMAGE")
 	private String image;
-
 
 	public String getUsername() {
 		return username;

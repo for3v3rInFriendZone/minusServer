@@ -17,11 +17,11 @@ import com.minusServer.www.app.service.UserService;
 
 @Service
 @Transactional
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
 	@Autowired
 	UserRepository userRepository;
-	
+
 	@Autowired
 	AppConfig encoder;
 	
@@ -56,8 +56,6 @@ public class UserServiceImpl implements UserService{
 		userRepository.deleteAll();
 	}
 
-	
-
 	@Override
 	public UserDto login(String username, String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
 		
@@ -77,7 +75,7 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public String hashPassword(String password) {
-		//BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		// BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		return encoder.passwordEncoder().encode(password);
 	}
 
@@ -85,7 +83,5 @@ public class UserServiceImpl implements UserService{
 	public boolean autenticate(String rawPassword, String databasePassword) {
 		return encoder.passwordEncoder().matches(rawPassword, databasePassword);
 	}
-
-
 
 }

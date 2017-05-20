@@ -14,7 +14,7 @@ public class BillDto extends AbstractDTO{
 	private String name;
 	private String location;
 	private String issuer;
-	private String date;
+	private Long date;
 	private BigDecimal price;
 	private List<Integer> items;
 	private Integer userId;
@@ -52,11 +52,11 @@ public class BillDto extends AbstractDTO{
 		this.issuer = issuer;
 	}
 	
-	public String getDate() {
+	public Long getDate() {
 		return date;
 	}
 	
-	public void setDate(String date) {
+	public void setDate(Long date) {
 		this.date = date;
 	}
 	

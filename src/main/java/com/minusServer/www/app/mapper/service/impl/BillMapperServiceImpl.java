@@ -1,6 +1,7 @@
 package com.minusServer.www.app.mapper.service.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,10 @@ public class BillMapperServiceImpl implements BillMapperService {
 		billDto.setName(bill.getName());
 		billDto.setLocation(bill.getLocation());
 		billDto.setIssuer(bill.getIssuer());
-		billDto.setDate(bill.getDate());
+
+		if (bill.getDate() != null) {
+			billDto.setDate(bill.getDate().getTime());
+		}
 		billDto.setPrice(bill.getPrice());
 		List<Integer> list = itemListToIntegerList(bill.getItems());
 		if (list != null) {
@@ -71,7 +75,10 @@ public class BillMapperServiceImpl implements BillMapperService {
 		bill.setName(billDTO.getName());
 		bill.setLocation(billDTO.getLocation());
 		bill.setIssuer(billDTO.getIssuer());
-		bill.setDate(billDTO.getDate());
+		if (billDTO.getDate() != null) {
+			Date date = new Date(billDTO.getDate());
+			bill.setDate(date);
+		}
 		bill.setPrice(billDTO.getPrice());
 		List<Item> list = integerListToItemList(billDTO.getItems());
 		if (list != null) {
@@ -92,7 +99,10 @@ public class BillMapperServiceImpl implements BillMapperService {
 		bill.setName(billDTO.getName());
 		bill.setLocation(billDTO.getLocation());
 		bill.setIssuer(billDTO.getIssuer());
-		bill.setDate(billDTO.getDate());
+		if (billDTO.getDate() != null) {
+			Date date = new Date(billDTO.getDate());
+			bill.setDate(date);
+		}
 		bill.setPrice(billDTO.getPrice());
 		if (bill.getItems() != null) {
 			List<Item> list = integerListToItemList(billDTO.getItems());

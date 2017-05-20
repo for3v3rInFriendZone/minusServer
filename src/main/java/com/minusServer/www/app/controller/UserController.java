@@ -9,12 +9,15 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.minusServer.www.app.dto.BillDto;
 import com.minusServer.www.app.dto.UserDto;
+import com.minusServer.www.app.service.BillService;
 import com.minusServer.www.app.service.UserService;
 
 @RestController
@@ -23,6 +26,9 @@ public class UserController {
 
 	@Autowired
 	UserService userService;
+
+	@Autowired
+	BillService billService;
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<UserDto> saveUser(@RequestBody UserDto userDto) {
@@ -34,18 +40,18 @@ public class UserController {
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<UserDto>> getAll() {
 
-		List<UserDto> users =  (List<UserDto>) userService.findAll();
+		List<UserDto> users = (List<UserDto>) userService.findAll();
 
 		return new ResponseEntity<List<UserDto>>(users, HttpStatus.OK);
 	}
-	
+
 	@RequestMapping(value = "/login", method = RequestMethod.POST, consumes = "application/json")
-	public ResponseEntity<UserDto> login(@RequestBody String payload){
-		
+	public ResponseEntity<UserDto> login(@RequestBody String payload) {
+
 		JSONObject json = new JSONObject(payload);
-		
+
 		UserDto userDto = null;
-		
+
 		try {
 			userDto = userService.login(json.getString("username"), json.getString("password"));
 		} catch (NoSuchAlgorithmException e) {
@@ -55,12 +61,17 @@ public class UserController {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		
-		if(userDto == null){
+
+		if (userDto == null) {
 			return new ResponseEntity<UserDto>(HttpStatus.NOT_FOUND);
 		} else {
 			return new ResponseEntity<UserDto>(userDto, HttpStatus.OK);
-		}		
+		}
+	}
+
+	@RequestMapping(value = "/userBills/{userId}", method = RequestMethod.GET)
+	public ResponseEntity<List<BillDto>> getUserBills(@PathVariable Integer userId) {
+		return new ResponseEntity<List<BillDto>>(billService.findUserBills(userId), HttpStatus.OK);
 	}
 
 }

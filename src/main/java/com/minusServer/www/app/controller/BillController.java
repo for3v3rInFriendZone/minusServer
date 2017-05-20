@@ -50,4 +50,12 @@ public class BillController {
 		}
 		
 	}
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<BillDto> deleteBill(@PathVariable("id") Integer id) {
+
+		billService.delete(id);
+		
+		return new ResponseEntity<BillDto>(HttpStatus.OK);
+	}
 }

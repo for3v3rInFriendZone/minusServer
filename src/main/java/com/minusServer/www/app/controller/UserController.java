@@ -2,8 +2,10 @@ package com.minusServer.www.app.controller;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
-import java.util.ArrayList;
 import java.util.List;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,10 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import com.minusServer.www.app.dto.LoginData;
+
+import com.minusServer.www.app.dto.BillDto;
 import com.minusServer.www.app.dto.UserDto;
-import com.minusServer.www.app.model.Bill;
-import com.minusServer.www.app.model.User;
 import com.minusServer.www.app.service.BillService;
 import com.minusServer.www.app.service.UserService;
 
@@ -25,54 +26,52 @@ public class UserController {
 
 	@Autowired
 	UserService userService;
-	
+
 	@Autowired
 	BillService billService;
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<User> saveUser(@RequestBody UserDto user) {
+	public ResponseEntity<UserDto> saveUser(@RequestBody UserDto userDto) {
 
-		userService.save(user);
-		return new ResponseEntity<User>(HttpStatus.CREATED);
+		userService.save(userDto);
+		return new ResponseEntity<UserDto>(HttpStatus.CREATED);
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<User>> getAll() {
+	public ResponseEntity<List<UserDto>> getAll() {
 
-		List<User> users = new ArrayList<User>();
-		users = (List<User>) userService.findAll();
+		List<UserDto> users = (List<UserDto>) userService.findAll();
 
-		return new ResponseEntity<List<User>>(users, HttpStatus.OK);
+		return new ResponseEntity<List<UserDto>>(users, HttpStatus.OK);
 	}
-	
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public ResponseEntity<User> login(@RequestBody LoginData loginData){
-		
-		User user = null;
-		
+
+	@RequestMapping(value = "/login", method = RequestMethod.POST, consumes = "application/json")
+	public ResponseEntity<UserDto> login(@RequestBody String payload) {
+
+		JSONObject json = new JSONObject(payload);
+
+		UserDto userDto = null;
+
 		try {
-			user = userService.login(loginData.getUsername(), loginData.getPassword());
+			userDto = userService.login(json.getString("username"), json.getString("password"));
 		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (InvalidKeySpecException e) {
-			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		
-		if(user == null){
-			return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+
+		if (userDto == null) {
+			return new ResponseEntity<UserDto>(HttpStatus.NOT_FOUND);
 		} else {
-			return new ResponseEntity<User>(user, HttpStatus.OK);
-		}		
+			return new ResponseEntity<UserDto>(userDto, HttpStatus.OK);
+		}
 	}
-	
+
 	@RequestMapping(value = "/userBills/{userId}", method = RequestMethod.GET)
-	public ResponseEntity<List<Bill>> getUserBills(@PathVariable Long userId){
-		
-		return new ResponseEntity<List<Bill>>(billService.findUserBills(userId), HttpStatus.OK);
-		
+	public ResponseEntity<List<BillDto>> getUserBills(@PathVariable Integer userId) {
+		return new ResponseEntity<List<BillDto>>(billService.findUserBills(userId), HttpStatus.OK);
 	}
-		
 
 }

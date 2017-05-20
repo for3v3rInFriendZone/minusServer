@@ -1,35 +1,33 @@
 package com.minusServer.www.app.dto;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-public class BillDto implements Serializable{
+public class BillDto extends AbstractDTO{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private Long id;
+	private Integer id;
 	private String name;
 	private String location;
 	private String issuer;
 	private Long date;
 	private BigDecimal price;
-	private List<ItemDto> items = new ArrayList<ItemDto>();
-	private UserDto user;
+	private List<Integer> items;
+	private Integer userId;
 	
-	public Long getId() {
+	
+	public Integer getId() {
 		return id;
 	}
-	
-	public void setId(Long id) {
+
+	public void setId(Integer id) {	
 		this.id = id;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
@@ -69,36 +67,21 @@ public class BillDto implements Serializable{
 	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
-	
-	public List<ItemDto> getItems() {
+
+	public List<Integer> getItems() {
 		return items;
 	}
-	
-	public void setItems(List<ItemDto> items) {
+
+	public void setItems(List<Integer> items) {
 		this.items = items;
 	}
-	
-	public UserDto getUser() {
-		return user;
-	}
-	
-	public void setUser(UserDto user) {
-		this.user = user;
+
+	public Integer getUserId() {
+		return userId;
 	}
 
-	public BillDto() {
-		super();
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
-
-	public BillDto(String name, String location, String issuer, Long date, BigDecimal price,
-			List<ItemDto> items, UserDto user) {
-		super();
-		this.name = name;
-		this.location = location;
-		this.issuer = issuer;
-		this.date = date;
-		this.price = price;
-		this.items = items;
-		this.user = user;
-	}
+	
 }

@@ -1,28 +1,27 @@
 package com.minusServer.www.app.dto;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class ItemDto implements Serializable{
+public class ItemDto extends AbstractDTO{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private Long id;
+	private Integer id;
 	private String name;
 	private Integer quantity;
 	private BigDecimal price;
 	
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
-	
-	public void setId(Long id) {
+
+	public void setId(Integer id) {
 		this.id = id;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
@@ -47,15 +46,4 @@ public class ItemDto implements Serializable{
 		this.price = price;
 	}
 
-	public ItemDto() {
-		super();
-	}
-
-	public ItemDto(Long id, String name, Integer quantity, BigDecimal price) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.quantity = quantity;
-		this.price = price;
-	}
 }

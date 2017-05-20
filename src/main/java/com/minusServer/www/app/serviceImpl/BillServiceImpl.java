@@ -1,12 +1,15 @@
 package com.minusServer.www.app.serviceImpl;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.minusServer.www.app.dto.BillDto;
+import com.minusServer.www.app.dto.UserDto;
+import com.minusServer.www.app.mapper.service.BillMapperService;
+import com.minusServer.www.app.mapper.service.UserMapperService;
 import com.minusServer.www.app.model.Bill;
 import com.minusServer.www.app.model.User;
 import com.minusServer.www.app.repository.BillRepository;
@@ -15,10 +18,11 @@ import com.minusServer.www.app.service.ItemService;
 import com.minusServer.www.app.service.UserService;
 
 @Service
+@Transactional
 public class BillServiceImpl implements BillService{
 	
 	@Autowired
-	BillRepository billRepo;
+	BillRepository billRepository;
 	
 	@Autowired
 	ItemService itemService;
@@ -26,52 +30,48 @@ public class BillServiceImpl implements BillService{
 	@Autowired
 	UserService userService;
 	
+	@Autowired
+	BillMapperService billMapper;
+	
+	@Autowired
+	UserMapperService userMapper;
+	
 	@Override
-	public Bill save(BillDto billDto) {
+	public BillDto save(BillDto billDto) {
 		
-		Bill bill = new Bill();
-		bill.setName(billDto.getName());
-		bill.setIssuer(billDto.getIssuer());
-		bill.setLocation(billDto.getLocation());
-		bill.setPrice(billDto.getPrice());
-		bill.setUser(userService.findOne(billDto.getUser().getId()));
-		bill.setDate(new Date(billDto.getDate()));
-		
-		for(int i = 0; i < billDto.getItems().size(); i++){
-			bill.getItems().add(itemService.save(billDto.getItems().get(i)));
-		}
-		
-		return billRepo.save(bill);
+		Bill bill = billMapper.billDTOToBill(billDto);
+		bill = billRepository.save(bill);
+		return billMapper.billToBillDTO(bill);
 	}
 
 	@Override
-	public Bill findOne(Long id) {
-		return billRepo.findOne(id);
+	public BillDto findOne(Integer id) {
+		BillDto billDto = billMapper.billToBillDTO( billRepository.findOne(id));
+		return billDto;
 	}
 
 	@Override
-	public Iterable<Bill> findAll() {
-		return billRepo.findAll();
+	public List<BillDto> findAll() {
+		return billMapper.billsToBillDTOs((List<Bill>) billRepository.findAll());
 	}
 
 	@Override
-	public void delete(Long id) {
-		billRepo.delete(id);
-	}
-
-	@Override
-	public void delete(Bill bill) {
-		billRepo.delete(bill);
+	public void delete(Integer id) {
+		billRepository.delete(id);
 	}
 
 	@Override
 	public void deleteAll() {
-		billRepo.deleteAll();
+		billRepository.deleteAll();
 	}
 
 	@Override
-	public List<Bill> findUserBills(Long user) {
-		return billRepo.findByUser(userService.findOne(user));
+	public List<BillDto> findUserBills(Integer userId) {
+		
+		UserDto userDto = userService.findOne(userId);
+		User user = userMapper.userDTOToUser(userDto);
+		List<Bill> bills = billRepository.findByUser(user);
+		return billMapper.billsToBillDTOs(bills);
 	}
 	
 

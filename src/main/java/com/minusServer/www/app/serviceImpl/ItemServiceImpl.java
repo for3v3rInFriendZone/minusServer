@@ -1,56 +1,54 @@
 package com.minusServer.www.app.serviceImpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.minusServer.www.app.dto.ItemDto;
+import com.minusServer.www.app.mapper.service.ItemMapperService;
 import com.minusServer.www.app.model.Item;
 import com.minusServer.www.app.repository.ItemRepository;
 import com.minusServer.www.app.service.ItemService;
 
 @Service
+@Transactional
 public class ItemServiceImpl implements ItemService{
 	
 	@Autowired
-	ItemRepository itemRepo;
+	ItemRepository itemRepository;
+	
+	@Autowired
+	ItemMapperService itemMapper;
 
 	@Override
-	public Item save(ItemDto itemDto) {
-		Item item = new Item();
-		item.setName(itemDto.getName());
-		item.setPrice(itemDto.getPrice());
-		item.setQuantity(itemDto.getQuantity());
-		return itemRepo.save(item);
+	public ItemDto save(ItemDto itemDto) {
+
+		Item item = itemMapper.itemDTOToItem(itemDto);
+		item = itemRepository.save(item);
+		return itemMapper.itemToIteDTO(item);
 	}
 
 	@Override
-	public Item findOne(Long id) {
-		// TODO Auto-generated method stub
-		return itemRepo.findOne(id);
+	public ItemDto findOne(Integer id) {
+		return itemMapper.itemToIteDTO(itemRepository.findOne(id));
 	}
 
 	@Override
-	public Iterable<Item> findAll() {
-		// TODO Auto-generated method stub
-		return itemRepo.findAll();
+	public List<ItemDto> findAll() {
+		return itemMapper.itemsToItemDTOs((List<Item>) itemRepository.findAll());
 	}
 
 	@Override
-	public void delete(Long id) {
-		// TODO Auto-generated method stub
-		itemRepo.delete(id);
-	}
-
-	@Override
-	public void delete(Item item) {
-		// TODO Auto-generated method stub
-		itemRepo.delete(item);
+	public void delete(Integer id) {
+		itemRepository.delete(id);
 	}
 
 	@Override
 	public void deleteAll() {
-		// TODO Auto-generated method stub
-		itemRepo.deleteAll();
+		itemRepository.deleteAll();
 	}
 
 }
+	

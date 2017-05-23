@@ -1,5 +1,6 @@
 package com.minusServer.www.app.serviceImpl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.minusServer.www.app.dto.BillDto;
 import com.minusServer.www.app.dto.UserDto;
 import com.minusServer.www.app.mapper.service.BillMapperService;
+import com.minusServer.www.app.mapper.service.ItemMapperService;
 import com.minusServer.www.app.mapper.service.UserMapperService;
 import com.minusServer.www.app.model.Bill;
 import com.minusServer.www.app.model.User;
@@ -36,16 +38,18 @@ public class BillServiceImpl implements BillService{
 	@Autowired
 	UserMapperService userMapper;
 	
+	@Autowired
+	ItemMapperService itemMapper;
+	
 	@Override
 	public BillDto save(BillDto billDto) {
-		
 		Bill bill = billMapper.billDTOToBill(billDto);
 		bill = billRepository.save(bill);
 		return billMapper.billToBillDTO(bill);
 	}
 
 	@Override
-	public BillDto findOne(Integer id) {
+	public BillDto findOne(Long id) {
 		BillDto billDto = billMapper.billToBillDTO( billRepository.findOne(id));
 		return billDto;
 	}
@@ -56,7 +60,7 @@ public class BillServiceImpl implements BillService{
 	}
 
 	@Override
-	public void delete(Integer id) {
+	public void delete(Long id) {
 		billRepository.delete(id);
 	}
 
@@ -66,7 +70,7 @@ public class BillServiceImpl implements BillService{
 	}
 
 	@Override
-	public List<BillDto> findUserBills(Integer userId) {
+	public List<BillDto> findUserBills(Long userId) {
 		
 		UserDto userDto = userService.findOne(userId);
 		User user = userMapper.userDTOToUser(userDto);

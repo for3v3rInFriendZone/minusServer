@@ -1,6 +1,7 @@
 package com.minusServer.www.app.dto;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 public class BillDto extends AbstractDTO{
@@ -10,21 +11,21 @@ public class BillDto extends AbstractDTO{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private Integer id;
+	private Long id;
 	private String name;
 	private String location;
 	private String issuer;
 	private Long date;
 	private BigDecimal price;
-	private List<Integer> items;
-	private Integer userId;
+	private List<ItemDto> items = new ArrayList<ItemDto>();
+	private UserDto user;
 	
 	
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {	
+	public void setId(Long id) {	
 		this.id = id;
 	}
 
@@ -68,20 +69,20 @@ public class BillDto extends AbstractDTO{
 		this.price = price;
 	}
 
-	public List<Integer> getItems() {
+	public List<ItemDto> getItems() {
 		return items;
 	}
 
-	public void setItems(List<Integer> items) {
+	public void setItems(List<ItemDto> items) {
 		this.items = items;
 	}
 
-	public Integer getUserId() {
-		return userId;
+	public UserDto getUser() {
+		return user;
 	}
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+	public void setUser(UserDto user) {
+		this.user = user;
 	}
 	
 }

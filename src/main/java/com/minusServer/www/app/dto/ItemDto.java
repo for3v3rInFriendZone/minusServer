@@ -9,16 +9,16 @@ public class ItemDto extends AbstractDTO{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private Integer id;
+	private Long id;
 	private String name;
 	private Integer quantity;
 	private BigDecimal price;
 	
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

@@ -9,13 +9,13 @@ public interface BillService {
 
 	public BillDto save(BillDto billDTO);
 
-	public BillDto findOne(Integer id);
+	public BillDto findOne(Long id);
 
 	public List<BillDto> findAll();
 
-	public void delete(Integer id);
+	public void delete(Long id);
 
 	public void deleteAll();
 
-	public List<BillDto> findUserBills(Integer userId);
+	public List<BillDto> findUserBills(Long userId);
 }

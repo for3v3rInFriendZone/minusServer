@@ -30,6 +30,8 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public UserDto save(UserDto userDto) {
+		String rawPassword = userDto.getPassword();
+		userDto.setPassword(hashPassword(rawPassword));
 		
 		User user = userMapper.userDTOToUser(userDto);
 		user = userRepository.save(user);
@@ -42,12 +44,12 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserDto findOne(Integer id) {
+	public UserDto findOne(Long id) {
 		return userMapper.userToUserDTO(userRepository.findOne(id));
 	}
 
 	@Override
-	public void delete(Integer id) {
+	public void delete(Long id) {
 		userRepository.delete(id);
 	}
 
@@ -60,11 +62,10 @@ public class UserServiceImpl implements UserService {
 	public UserDto login(String username, String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
 		
 		User user = userRepository.findByUsername(username);
-		UserDto userDto = userMapper.userToUserDTO(user);
 		
 		if(user != null){
 			if(autenticate(password, user.getPassword())){
-				return userDto;
+				return userMapper.userToUserDTO(user);
 			} else {
 				return null;
 			}
@@ -75,7 +76,6 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public String hashPassword(String password) {
-		// BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		return encoder.passwordEncoder().encode(password);
 	}
 

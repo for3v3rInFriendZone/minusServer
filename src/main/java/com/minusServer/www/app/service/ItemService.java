@@ -9,11 +9,11 @@ public interface ItemService {
 
 	public ItemDto save(ItemDto itemDTO);
 
-	public ItemDto findOne(Integer id);
+	public ItemDto findOne(Long id);
 
 	public List<ItemDto> findAll();
 
-	public void delete(Integer id);
+	public void delete(Long id);
 
 	public void deleteAll();
 }

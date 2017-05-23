@@ -9,11 +9,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.minusServer.www.app.dto.BillDto;
+import com.minusServer.www.app.dto.ItemDto;
+import com.minusServer.www.app.dto.UserDto;
 import com.minusServer.www.app.mapper.ReferenceMapper;
 import com.minusServer.www.app.mapper.service.BillMapperService;
+import com.minusServer.www.app.mapper.service.ItemMapperService;
 import com.minusServer.www.app.model.Bill;
 import com.minusServer.www.app.model.Item;
 import com.minusServer.www.app.model.User;
+import com.minusServer.www.app.service.ItemService;
 
 @Service
 @Transactional
@@ -21,6 +25,12 @@ public class BillMapperServiceImpl implements BillMapperService {
 
 	@Autowired
 	private ReferenceMapper referenceMapper;
+	
+	@Autowired
+	private ItemService itemService;
+	
+	@Autowired
+	private ItemMapperService itemMapper;
 
 	@Override
 	public BillDto billToBillDTO(Bill bill) {
@@ -30,7 +40,7 @@ public class BillMapperServiceImpl implements BillMapperService {
 
 		BillDto billDto = new BillDto();
 
-		billDto.setUserId(billUserId(bill));
+		billDto.setUser(billUser(bill));
 		billDto.setId(bill.getId());
 		billDto.setName(bill.getName());
 		billDto.setLocation(bill.getLocation());
@@ -39,8 +49,11 @@ public class BillMapperServiceImpl implements BillMapperService {
 		if (bill.getDate() != null) {
 			billDto.setDate(bill.getDate().getTime());
 		}
+		
 		billDto.setPrice(bill.getPrice());
-		List<Integer> list = itemListToIntegerList(bill.getItems());
+		
+		List<ItemDto> list = itemListToIntegerList(bill.getItems());
+		
 		if (list != null) {
 			billDto.setItems(list);
 		}
@@ -67,22 +80,42 @@ public class BillMapperServiceImpl implements BillMapperService {
 		if (billDTO == null) {
 			return null;
 		}
-
 		Bill bill = new Bill();
-
-		bill.setUser(referenceMapper.resolve(billDTO.getUserId(), User.class));
-		bill.setId(billDTO.getId());
-		bill.setName(billDTO.getName());
-		bill.setLocation(billDTO.getLocation());
-		bill.setIssuer(billDTO.getIssuer());
-		if (billDTO.getDate() != null) {
-			Date date = new Date(billDTO.getDate());
-			bill.setDate(date);
-		}
-		bill.setPrice(billDTO.getPrice());
-		List<Item> list = integerListToItemList(billDTO.getItems());
-		if (list != null) {
-			bill.setItems(list);
+		
+		if(billDTO.getId() != null){
+			bill.setUser(referenceMapper.resolve(billDTO.getUser().getId(), User.class));
+			bill.setId(billDTO.getId());
+			bill.setName(billDTO.getName());
+			bill.setLocation(billDTO.getLocation());
+			bill.setIssuer(billDTO.getIssuer());
+			if (billDTO.getDate() != null) {
+				Date date = new Date(billDTO.getDate());
+				bill.setDate(date);
+			}
+			bill.setPrice(billDTO.getPrice());
+			List<Item> list = integerListToItemList(billDTO.getItems());
+			if (list != null) {
+				bill.setItems(list);
+			}
+		} else {
+			bill.setUser(referenceMapper.resolve(billDTO.getUser().getId(), User.class));
+			bill.setName(billDTO.getName());
+			bill.setLocation(billDTO.getLocation());
+			bill.setIssuer(billDTO.getIssuer());
+			if (billDTO.getDate() != null) {
+				Date date = new Date(billDTO.getDate());
+				bill.setDate(date);
+			}
+			bill.setPrice(billDTO.getPrice());
+			/*List<Item> list = integerListToItemList(billDTO.getItems());
+			if (list != null) {
+				bill.setItems(list);
+			}*/
+			if(!billDTO.getItems().isEmpty()){
+				for(ItemDto itemDto : billDTO.getItems()){
+					bill.getItems().add(itemMapper.itemDTOToItem(itemService.save(itemDto)));
+				}
+			}
 		}
 
 		return bill;
@@ -94,7 +127,7 @@ public class BillMapperServiceImpl implements BillMapperService {
 			return;
 		}
 
-		bill.setUser(referenceMapper.resolve(billDTO.getUserId(), User.class));
+		bill.setUser(referenceMapper.resolve(billDTO.getUser().getId(), User.class));
 		bill.setId(billDTO.getId());
 		bill.setName(billDTO.getName());
 		bill.setLocation(billDTO.getLocation());
@@ -135,43 +168,64 @@ public class BillMapperServiceImpl implements BillMapperService {
 		return list;
 	}
 
-	private Integer billUserId(Bill bill) {
+	private UserDto billUser(Bill bill) {
 
 		if (bill == null) {
 			return null;
 		}
+		
 		User user = bill.getUser();
+		
 		if (user == null) {
 			return null;
 		}
-		Integer id = user.getId();
-		if (id == null) {
-			return null;
-		}
-		return id;
+		
+		UserDto userDto = new UserDto();
+		
+		userDto.setEmail(user.getEmail());
+		userDto.setFirstname(user.getFirstname());
+		userDto.setId(user.getId());
+		userDto.setImage(user.getImage());
+		userDto.setLastname(user.getLastname());
+		userDto.setPassword(user.getPassword());
+		userDto.setUsername(user.getUsername());
+		
+		return userDto;
 	}
 
-	protected List<Integer> itemListToIntegerList(List<Item> list) {
+	protected List<ItemDto> itemListToIntegerList(List<Item> list) {
 		if (list == null) {
 			return null;
 		}
 
-		List<Integer> list_ = new ArrayList<Integer>();
+		List<ItemDto> list_ = new ArrayList<ItemDto>();
+		
 		for (Item item : list) {
-			list_.add(referenceMapper.toReference(item));
+			ItemDto _item = new ItemDto();
+			
+			_item.setId(item.getId());
+			_item.setName(item.getName());
+			_item.setPrice(item.getPrice());
+			_item.setQuantity(item.getQuantity());
+			list_.add(_item);
 		}
 
 		return list_;
 	}
 
-	protected List<Item> integerListToItemList(List<Integer> list) {
+	protected List<Item> integerListToItemList(List<ItemDto> list) {
 		if (list == null) {
 			return null;
 		}
 
 		List<Item> list_ = new ArrayList<Item>();
-		for (Integer integer : list) {
-			list_.add(referenceMapper.resolve(integer, Item.class));
+		for (ItemDto item : list) {
+			Item _item = new Item();
+			_item.setId(item.getId());
+			_item.setName(item.getName());
+			_item.setPrice(item.getPrice());
+			_item.setQuantity(item.getQuantity());
+			list_.add(_item);
 		}
 
 		return list_;

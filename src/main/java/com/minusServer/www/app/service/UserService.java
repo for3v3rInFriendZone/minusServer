@@ -12,9 +12,9 @@ public interface UserService {
 	
 	public Iterable<UserDto> findAll();
 	
-	public UserDto findOne(Integer id);
+	public UserDto findOne(Long id);
 	
-	public void delete(Integer id);
+	public void delete(Long id);
 	
 	public void deleteAll();
 	

@@ -14,11 +14,11 @@ public class ReferenceMapper {
 	@PersistenceContext
 	private EntityManager entityManager;
 
-	public <T extends AbstractBaseEntity> T resolve(Integer id, @TargetType Class<T> entityClass) {
+	public <T extends AbstractBaseEntity> T resolve(Long id, @TargetType Class<T> entityClass) {
 		return id != null ? entityManager.find(entityClass, id) : null;
 	}
 
-	public Integer toReference(AbstractBaseEntity entity) {
+	public Long toReference(AbstractBaseEntity entity) {
 		return entity != null ? entity.getId() : null;
 	}
 	

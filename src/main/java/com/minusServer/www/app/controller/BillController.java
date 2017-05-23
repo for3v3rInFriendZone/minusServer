@@ -34,12 +34,12 @@ public class BillController {
 	}
 	
 	@RequestMapping(value = "/user", method = RequestMethod.GET)
-	public ResponseEntity<List<BillDto>> getUserBills(@Param(value = "id") Integer id){
+	public ResponseEntity<List<BillDto>> getUserBills(@Param(value = "id") Long id){
 		return new ResponseEntity<List<BillDto>>(billService.findUserBills(id), HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<BillDto> getOne(@PathVariable("id") Integer id){
+	public ResponseEntity<BillDto> getOne(@PathVariable("id") Long id){
 		
 		BillDto billDto = billService.findOne(id);
 		
@@ -52,7 +52,7 @@ public class BillController {
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<BillDto> deleteBill(@PathVariable("id") Integer id) {
+	public ResponseEntity<BillDto> deleteBill(@PathVariable("id") Long id) {
 
 		billService.delete(id);
 		

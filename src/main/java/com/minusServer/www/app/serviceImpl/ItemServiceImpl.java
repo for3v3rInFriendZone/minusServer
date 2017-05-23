@@ -31,7 +31,7 @@ public class ItemServiceImpl implements ItemService{
 	}
 
 	@Override
-	public ItemDto findOne(Integer id) {
+	public ItemDto findOne(Long id) {
 		return itemMapper.itemToIteDTO(itemRepository.findOne(id));
 	}
 
@@ -41,7 +41,7 @@ public class ItemServiceImpl implements ItemService{
 	}
 
 	@Override
-	public void delete(Integer id) {
+	public void delete(Long id) {
 		itemRepository.delete(id);
 	}
 

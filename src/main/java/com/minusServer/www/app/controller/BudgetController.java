@@ -43,12 +43,12 @@ public class BudgetController {
 		}
 	}
 	
-	@RequestMapping(value = "/user", method = RequestMethod.GET)
-	public ResponseEntity<List<BudgetDto>> findUserBudgets(@Param(value = "id") Long id){
+	@RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
+	public ResponseEntity<List<BudgetDto>> findUserBudgets(@PathVariable("id") Long id){
 		return new ResponseEntity<List<BudgetDto>>(budgetService.findUserBudgets(id), HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	@RequestMapping(value = "/update", method = RequestMethod.PUT)
 	public ResponseEntity<BudgetDto> update(@RequestBody BudgetDto budgetDto){
 		return new ResponseEntity<BudgetDto>(budgetService.update(budgetDto), HttpStatus.OK);
 	}

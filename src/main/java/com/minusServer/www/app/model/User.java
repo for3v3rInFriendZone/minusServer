@@ -34,7 +34,7 @@ public class User extends AbstractBaseEntity {
 	@Column(name = "LASTNAME")
 	private String lastname;
 
-	@Column(name = "IMAGE")
+	@Column(name = "IMAGE", length = 10485760)
 	private String image;
 
 	public String getUsername() {

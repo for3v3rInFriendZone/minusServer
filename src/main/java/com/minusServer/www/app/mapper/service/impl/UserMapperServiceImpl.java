@@ -29,7 +29,7 @@ public class UserMapperServiceImpl implements UserMapperService {
 		userDto.setLastname(user.getLastname());
 		userDto.setEmail(user.getEmail());
 		userDto.setImage(user.getImage());
-		userDto.setColour(user.getColour());
+		userDto.setColor(user.getColor());
 		userDto.setFont(user.getFont());
 
 		return userDto;
@@ -64,7 +64,7 @@ public class UserMapperServiceImpl implements UserMapperService {
 		user.setFirstname(userDTO.getFirstname());
 		user.setLastname(userDTO.getLastname());
 		user.setImage(userDTO.getImage());
-		user.setColour(userDTO.getColour());
+		user.setColor(userDTO.getColor());
 		user.setFont(userDTO.getFont());
 
 		return user;
@@ -83,7 +83,7 @@ public class UserMapperServiceImpl implements UserMapperService {
 		user.setFirstname(userDTO.getFirstname());
 		user.setLastname(userDTO.getLastname());
 		user.setImage(userDTO.getImage());
-		user.setColour(userDTO.getColour());
+		user.setColor(userDTO.getColor());
 		user.setFont(userDTO.getFont());
 
 	}

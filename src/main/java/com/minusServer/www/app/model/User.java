@@ -40,8 +40,8 @@ public class User extends AbstractBaseEntity {
 	@Column(name = "FONT")
 	private String font;
 	
-	@Column(name = "COLOUR")
-	private String colour;
+	@Column(name = "COLOR")
+	private String color;
 
 	public String getUsername() {
 		return username;
@@ -99,11 +99,11 @@ public class User extends AbstractBaseEntity {
 		this.font = font;
 	}
 
-	public String getColour() {
-		return colour;
+	public String getColor() {
+		return color;
 	}
 
-	public void setColour(String colour) {
-		this.colour = colour;
+	public void setColor(String colour) {
+		this.color = colour;
 	}
 }

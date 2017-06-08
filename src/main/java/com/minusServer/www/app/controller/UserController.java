@@ -44,6 +44,11 @@ public class UserController {
 
 		return new ResponseEntity<List<UserDto>>(users, HttpStatus.OK);
 	}
+	
+	@RequestMapping(method = RequestMethod.PUT)
+	public ResponseEntity<UserDto> update(@RequestBody UserDto userDto){
+		return new ResponseEntity<UserDto>(userService.update(userDto), HttpStatus.OK);
+	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST, consumes = "application/json")
 	public ResponseEntity<UserDto> login(@RequestBody String payload) {

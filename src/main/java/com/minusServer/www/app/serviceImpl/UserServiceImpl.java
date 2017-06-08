@@ -84,4 +84,11 @@ public class UserServiceImpl implements UserService {
 		return encoder.passwordEncoder().matches(rawPassword, databasePassword);
 	}
 
+	@Override
+	public UserDto update(UserDto userDto) {
+		User user = userRepository.findOne(userDto.getId());
+		userMapper.updateUserFromUserDto(user, userDto);
+		return userMapper.userToUserDTO(userRepository.save(user));
+	}
+
 }

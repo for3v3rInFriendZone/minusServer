@@ -23,4 +23,6 @@ public interface UserService {
 	public boolean autenticate(String rawPassword, String databasePassword);
 	
 	public UserDto login(String username, String password) throws NoSuchAlgorithmException, InvalidKeySpecException;
+	
+	public UserDto update(UserDto userDto);
 }

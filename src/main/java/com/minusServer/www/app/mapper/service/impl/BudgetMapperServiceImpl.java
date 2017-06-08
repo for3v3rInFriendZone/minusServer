@@ -46,10 +46,7 @@ public class BudgetMapperServiceImpl implements BudgetMapperService{
 		
 		Budget budget = new Budget();
 		
-		if(budgetDto.getId() != null){
-			budget.setId(budgetDto.getId());
-		}
-		
+		budget.setId(budgetDto.getId());
 		budget.setDateFrom(new Date(budgetDto.getDateFrom()));
 		budget.setDateTo(new Date(budgetDto.getDateTo()));
 		budget.setValue(budgetDto.getValue());

@@ -14,6 +14,8 @@ public class UserDto extends AbstractDTO{
 	private String lastname;
 	private String email;
 	private String image;
+	private String font;
+	private String colour;
 	
 	public Long getId() {
 		return id;
@@ -69,6 +71,22 @@ public class UserDto extends AbstractDTO{
 	
 	public void setImage(String image) {
 		this.image = image;
+	}
+
+	public String getFont() {
+		return font;
+	}
+
+	public void setFont(String font) {
+		this.font = font;
+	}
+
+	public String getColour() {
+		return colour;
+	}
+
+	public void setColour(String colour) {
+		this.colour = colour;
 	}
 	
 }

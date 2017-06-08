@@ -32,7 +32,9 @@ public class BudgetServiseImpl implements BudgetServise{
 	
 	@Override
 	public BudgetDto save(BudgetDto budgetDto) {
-		return budgetMapper.budgetToBudgetDto(budgetRepository.save(budgetMapper.budgetDtoToBudget(budgetDto)));
+		Budget budget = budgetMapper.budgetDtoToBudget(budgetDto);
+		budgetRepository.save(budget);
+		return budgetMapper.budgetToBudgetDto(budget);
 	}
 
 	@Override

@@ -36,6 +36,12 @@ public class User extends AbstractBaseEntity {
 
 	@Column(name = "IMAGE", length = 10485760)
 	private String image;
+	
+	@Column(name = "FONT")
+	private String font;
+	
+	@Column(name = "COLOUR")
+	private String colour;
 
 	public String getUsername() {
 		return username;
@@ -85,4 +91,19 @@ public class User extends AbstractBaseEntity {
 		this.image = image;
 	}
 
+	public String getFont() {
+		return font;
+	}
+
+	public void setFont(String font) {
+		this.font = font;
+	}
+
+	public String getColour() {
+		return colour;
+	}
+
+	public void setColour(String colour) {
+		this.colour = colour;
+	}
 }

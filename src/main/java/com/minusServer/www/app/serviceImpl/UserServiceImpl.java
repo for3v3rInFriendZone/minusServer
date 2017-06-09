@@ -87,7 +87,10 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserDto update(UserDto userDto) {
 		User user = userRepository.findOne(userDto.getId());
-		userMapper.updateUserFromUserDto(user, userDto);
+		user.setColor(userDto.getColor());
+		user.setFont(userDto.getFont());
+		user.setLastname(userDto.getLastname());
+		user.setFirstname(userDto.getFirstname());
 		return userMapper.userToUserDTO(userRepository.save(user));
 	}
 

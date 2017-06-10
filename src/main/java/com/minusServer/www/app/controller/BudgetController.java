@@ -50,6 +50,6 @@ public class BudgetController {
 	
 	@RequestMapping(value = "/update", method = RequestMethod.PUT)
 	public ResponseEntity<BudgetDto> update(@RequestBody BudgetDto budgetDto){
-		return new ResponseEntity<BudgetDto>(budgetService.update(budgetDto), HttpStatus.OK);
+		return new ResponseEntity<BudgetDto>(budgetService.updateStartValue(budgetDto), HttpStatus.OK);
 	}
 }

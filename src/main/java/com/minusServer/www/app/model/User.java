@@ -42,6 +42,17 @@ public class User extends AbstractBaseEntity {
 	
 	@Column(name = "COLOR")
 	private String color;
+	
+	@Column(name = "NOTIFICATION")
+	private boolean notification;
+
+	public boolean isNotification() {
+		return notification;
+	}
+
+	public void setNotification(boolean notification) {
+		this.notification = notification;
+	}
 
 	public String getUsername() {
 		return username;

@@ -12,7 +12,8 @@ public class BudgetDto extends AbstractDTO{
 	private Long id;
 	private Long dateFrom;
 	private Long dateTo;
-	private BigDecimal value;
+	private BigDecimal startValue;
+	private BigDecimal currentValue;
 	private UserDto user;
 	
 	public BudgetDto() {
@@ -20,11 +21,12 @@ public class BudgetDto extends AbstractDTO{
 		// TODO Auto-generated constructor stub
 	}
 	
-	public BudgetDto(Long dateFrom, Long dateTo, BigDecimal value, UserDto user) {
+	public BudgetDto(Long dateFrom, Long dateTo, BigDecimal startValue, BigDecimal currentValue, UserDto user) {
 		super();
 		this.dateFrom = dateFrom;
 		this.dateTo = dateTo;
-		this.value = value;
+		this.startValue = startValue;
+		this.currentValue = currentValue;
 		this.user = user;
 	}
 
@@ -52,12 +54,20 @@ public class BudgetDto extends AbstractDTO{
 		this.dateTo = dateTo;
 	}
 	
-	public BigDecimal getValue() {
-		return value;
+	public BigDecimal getStartValue() {
+		return startValue;
 	}
-	
-	public void setValue(BigDecimal value) {
-		this.value = value;
+
+	public void setStartValue(BigDecimal startValue) {
+		this.startValue = startValue;
+	}
+
+	public BigDecimal getCurrentValue() {
+		return currentValue;
+	}
+
+	public void setCurrentValue(BigDecimal currentValue) {
+		this.currentValue = currentValue;
 	}
 	
 	public UserDto getUser() {

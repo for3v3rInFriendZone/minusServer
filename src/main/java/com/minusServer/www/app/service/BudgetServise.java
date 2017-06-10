@@ -18,5 +18,6 @@ public interface BudgetServise {
 	
 	public List<BudgetDto> findUserBudgets(Long userId);
 	
-	public BudgetDto update(BudgetDto budgetDto);
+	public BudgetDto updateStartValue(BudgetDto budgetDto);
+	
 }

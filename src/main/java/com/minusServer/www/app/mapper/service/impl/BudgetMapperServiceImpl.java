@@ -35,7 +35,8 @@ public class BudgetMapperServiceImpl implements BudgetMapperService{
 		budgetDto.setId(budget.getId());
 		budgetDto.setDateFrom(budget.getDateFrom().getTime());
 		budgetDto.setDateTo(budget.getDateTo().getTime());
-		budgetDto.setValue(budget.getValue());
+		budgetDto.setStartValue(budget.getStartValue());
+		budgetDto.setCurrentValue(budget.getCurrentValue());
 		budgetDto.setUser(userMapperServise.userToUserDTO(budget.getUser()));
 		return budgetDto;
 	}
@@ -50,7 +51,8 @@ public class BudgetMapperServiceImpl implements BudgetMapperService{
 		budget.setId(budgetDto.getId());
 		budget.setDateFrom(new Date(budgetDto.getDateFrom()));
 		budget.setDateTo(new Date(budgetDto.getDateTo()));
-		budget.setValue(budgetDto.getValue());
+		budget.setStartValue(budgetDto.getStartValue());
+		budget.setCurrentValue(budgetDto.getCurrentValue());
 		budget.setUser(userMapperServise.userDTOToUser(budgetDto.getUser()));
 		
 		return budget;

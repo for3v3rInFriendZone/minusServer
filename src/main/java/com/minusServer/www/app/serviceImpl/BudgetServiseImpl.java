@@ -63,9 +63,11 @@ public class BudgetServiseImpl implements BudgetServise{
 	}
 
 	@Override
-	public BudgetDto update(BudgetDto budgetDto) {
+	public BudgetDto updateStartValue(BudgetDto budgetDto) {
 		Budget budget = budgetRepository.findOne(budgetDto.getId());
-		budget.setValue(budgetDto.getValue());
+		budget.setStartValue(budgetDto.getStartValue());
+		budget.setCurrentValue(budgetDto.getCurrentValue());
+		
 		return budgetMapper.budgetToBudgetDto(budgetRepository.save(budget));
 	}
 

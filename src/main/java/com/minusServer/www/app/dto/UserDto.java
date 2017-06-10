@@ -16,7 +16,16 @@ public class UserDto extends AbstractDTO{
 	private String image;
 	private String font;
 	private String color;
+	private boolean notification;
 	
+	public boolean isNotification() {
+		return notification;
+	}
+
+	public void setNotification(boolean notification) {
+		this.notification = notification;
+	}
+
 	public Long getId() {
 		return id;
 	}

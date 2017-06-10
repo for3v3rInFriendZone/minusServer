@@ -91,6 +91,7 @@ public class UserServiceImpl implements UserService {
 		user.setFont(userDto.getFont());
 		user.setLastname(userDto.getLastname());
 		user.setFirstname(userDto.getFirstname());
+		user.setNotification(userDto.isNotification());
 		return userMapper.userToUserDTO(userRepository.save(user));
 	}
 

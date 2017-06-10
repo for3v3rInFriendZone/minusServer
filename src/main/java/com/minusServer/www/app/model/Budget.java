@@ -37,18 +37,23 @@ public class Budget implements Serializable{
 	private Date dateTo;
 	
 	@NotNull
-	@Column(name = "VALUE")
-	private BigDecimal value;
+	@Column(name = "STARTVALUE")
+	private BigDecimal startValue;
+
+	@NotNull
+	@Column(name = "CURRENTVALUE")
+	private BigDecimal currentValue;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "MINUSUSER", nullable = true)
 	private User user;
 
-	public Budget(Date dateFrom, Date dateTo, BigDecimal value) {
+	public Budget(Date dateFrom, Date dateTo, BigDecimal startValue, BigDecimal currentValue) {
 		super();
 		this.dateFrom = dateFrom;
 		this.dateTo = dateTo;
-		this.value = value;
+		this.startValue = startValue;
+		this.currentValue = currentValue;
 	}
 
 	public Budget() {
@@ -79,12 +84,20 @@ public class Budget implements Serializable{
 		this.dateTo = dateTo;
 	}
 
-	public BigDecimal getValue() {
-		return value;
+	public BigDecimal getStartValue() {
+		return startValue;
 	}
 
-	public void setValue(BigDecimal value) {
-		this.value = value;
+	public void setStartValue(BigDecimal startValue) {
+		this.startValue = startValue;
+	}
+
+	public BigDecimal getCurrentValue() {
+		return currentValue;
+	}
+
+	public void setCurrentValue(BigDecimal currentValue) {
+		this.currentValue = currentValue;
 	}
 
 	public User getUser() {
